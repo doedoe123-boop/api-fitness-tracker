@@ -8,6 +8,7 @@ interface ExerciseApiError {
   error: string;
 }
 
+/// Fetch data from the API with caching
 async function fetchFromApi(endpoint: string) {
   const cacheKey = `exercise_${endpoint}`;
   const cachedData = getCached(cacheKey);
@@ -27,6 +28,7 @@ async function fetchFromApi(endpoint: string) {
   return response.data;
 }
 
+// Handle GET requests to the API
 export async function GET(request: NextRequest) {
   try {
     const rapidApiKey = process.env.RAPIDAPI_KEY;
@@ -103,6 +105,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// Handle OPTIONS requests for CORS
 export async function OPTIONS() {
   return NextResponse.json(null, {
     status: 204,
